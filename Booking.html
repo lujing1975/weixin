@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>BootStrap Study</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+	<body>
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="js/jquery-1.10.0.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="js/bootstrap.min.js"></script>
+	<ul class="nav nav-tabs" id="myTab">  
+		<li class="active"><a data-toggle="tab" href="#BasicInfo">BASIC INFO</a></li>
+		<li class=""><a data-toggle="tab" href="#GuestInfo">GUEST INFO</a></li>
+		<li class=""><a data-toggle="tab" href="#FlightInfo">FLIGHT INFO</a></li>
+		<li class=""><a data-toggle="tab" href="#PaymentInfo">Payment INFO</a></li>
+
+
+	</ul>
+
+	<div class="tab-content" id="myTabContent">
+		<div id="BasicInfo" class="tab-pane fade active in">
+			<div class="row">
+			<p></p>
+			</div>
+			<div class="form-inline">
+				<div class="form-group"><label>Start From :</label></div>
+				<div class="form-group">					
+					<input type="text" class="form-control" placeholder="Please enter Start From">
+				</div>
+				<div class="form-group"><label>GPS :</label></div>
+				<div class="form-group">					
+					<input type="text" class="form-control" placeholder="Please enter GPS">
+				</div>
+			</div>
+			<div class="row">
+			<p></p>
+			</div>
+			<div class="form-inline">
+				<div class="form-group"><label>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label></div>
+				<div class="form-group">					
+					<input type="text" class="form-control" placeholder="Please enter Address">
+				</div>
+				<div class="form-group"><label>Tel&nbsp;&nbsp;&nbsp;:</label></div>
+				<div class="form-group">					
+					<input type="text" class="form-control" placeholder="Please enter Tel">
+				</div>
+			</div>
+
+
+			<div class="row">
+			<p></p>
+			</div>
+			<div class="form-inline">
+				<div class="form-group"><label>To From&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label></div>
+				<div class="form-group">					
+					<input type="text" class="form-control" placeholder="Please enter To From">
+				</div>
+				<div class="form-group"><label>GPS :</label></div>
+				<div class="form-group">					
+					<input type="text" class="form-control" placeholder="Please enter GPS">
+				</div>
+			</div>
+			<div class="row">
+			<p></p>
+			</div>
+			<div class="form-inline">
+				<div class="form-group"><label>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label></div>
+				<div class="form-group">					
+					<input type="text" class="form-control" placeholder="Please enter Address">
+				</div>
+				<div class="form-group"><label>Tel&nbsp;&nbsp;&nbsp;:</label></div>
+				<div class="form-group">					
+					<input type="text" class="form-control" placeholder="Please enter Tel">
+				</div>
+			</div>
+
+		</div>
+
+		<div id="GuestInfo" class="tab-pane fade">
+			<p>单击"客户信息"时显示该区域</p>
+		</div>
+
+		<div id="FlightInfo" class="tab-pane fade">
+			<p>单击"航班信息"时显示该区域</p>
+		</div>
+
+		<div id="PaymentInfo" class="tab-pane fade">
+			<p>单击"付款信息"时显示该区域</p>
+		</div>
+	</div>
+
+
+	</body>
+</html>
