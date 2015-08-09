@@ -1,1 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>BootStrap Study</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- 新 Bootstrap -select插件 CSS 文件 -->
+	<link rel="stylesheet" href="css/bootstrap-select.min.css">
+	<!-- spinner -->
+	<link rel="stylesheet" href="css/bootstrap-spinner.css">
+	<!-- font -->
+	<!--link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet"-->
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/font-awesome.css" rel="stylesheet">
+	<!-- datetimepicker -->
+	<link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+</head>
+	<body>
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="js/jquery-1.10.0.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- 最新的 Bootstrap Select JavaScript 文件 -->
+  	<script src="js/bootstrap-select.min.js"></script>
+	<!-- 最新的 Spinner文件 -->
+	<script src="js/jquery.spinner.min.js"></script>
+	<!-- 最新的 日期格式文件 -->
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<!-- choose.js用于保存那些公共用法 -->
+    <script src="js/choose.js"></script>
+	<!-- method.js用于保存那些公共用法 -->
+    <script src="js/method.js"></script>
+	<!-- 增加代码开始 -->
+	<script type="text/javascript">
+	$(document).ready(function(){
+
+		//初始化
+		
+		
+		//有控制
+			$("#btn_1_next").click(function(e) {
+				e.preventDefault();	
+				$('#a_2').trigger('click');
+				// body...
+			})
+
+			$("#btn_2_next").click(function(e) {
+				e.preventDefault();	
+				$('#a_3').trigger('click');
+				// body...
+			})
+
+			$("#btn_3_next").click(function(e) {
+				e.preventDefault();	
+				$('#a_4').trigger('click');
+				// body...
+			})
+
+
+			$("#btn_1_pre").click(function(e) {
+				e.preventDefault();	
+				$('#a_1').trigger('click');
+				// body...
+			})
+
+			$("#btn_2_pre").click(function(e) {
+				e.preventDefault();	
+				$('#a_2').trigger('click');
+				// body...
+			})
+
+			$("#btn_3_pre").click(function(e) {
+				e.preventDefault();	
+				$('#a_3').trigger('click');
+				// body...
+			})
+
+			// 调用Choose.js中方法,此处公司ID要换成录入用户的ID
+			getFormInitInfo(1);
+
+			//Service Type为送机时要求可输入航班号
+			$("#sltServiceType").change(function(e){
+			
+					if (this.value==1 || this.value==2)
+					{						
+						$("#txtFlightNo").removeAttr("disabled");
+						$("#sltAirport").removeAttr("disabled");
+
+						$("#divFlight").fadeIn(800);
+						$("#divFlight1").fadeIn(800);
+
+						$("#divAirport").fadeIn(800);
+						$("#divAirport1").fadeIn(800);
+					}
+					else
+					{
+						$("#txtFlightNo").val("");
+						$("#txtFlightNo").attr("disabled","true");
+						$("#sltAirport").val("0");
+						$("#sltAirport").attr("disabled","true");
+						
+						$("#divFlight").fadeOut(800);
+						$("#divFlight1").fadeOut(800);
+
+						$("#divAirport").fadeOut(800);
+						$("#divAirport1").fadeOut(800);
+
+					}
+
+			})
+
+			//Basic Flight No有内容时,后面也要一致
+			$("#txtFlightNo").change(function(e){
+			
+					if (this.value!="")
+					{						
+						$("#txtFlightNo1").val(this.value);						
+					}
+			})	
+
+			//增加控制,如果有转机,就可以输入,否则就disable
+			$("#ckbTransferFlight").click(function(e){
+
+				if (this.checked)
+					{						
+						$("#txtTransFlightNo").removeAttr("disabled");
+						$("#txtTransAirline").removeAttr("disabled");
+						$("#txtTransDepartureTime").removeAttr("disabled");
+						// $("#txtTransFlightNo").show(100);
+						// $("#txtTransAirline").show(100);
+						// $("#txtTransDepartureTime").show(100);
+					}
+				else
+					{					
+						$("#txtTransFlightNo").val("");
+						$("#txtTransFlightNo").attr("disabled","true");
+						$("#txtTransAirline").val("");
+						$("#txtTransAirline").attr("disabled","true");
+						$("#txtTransDepartureTime").val("");
+						$("#txtTransDepartureTime").attr("disabled","true");
+
+						// $("#txtTransFlightNo").hide(100);
+						// $("#txtTransAirline").hide(100);
+						// $("#txtTransDepartureTime").hide(100);
+
+					}
+
+			})
+		//测试数据
+			$("#btnTest").click(function(e) {
+				writetestInfo();
+			})
+
+		//有提交,凡是类型为submit的内容调用此方法
+			$("[type='submit']").click(function(e) {
+				e.preventDefault();	
+				var intServiceTypeId  = $('#sltServiceType').val();
+				//var number1 = $('#sltCustType').val();
+	        	if(sltServiceType == "0")
+	        	{
+	            	alert("姓名不能为空");
+	            	return;
+	        	}
+				// 控制部分
+				// alert($("#txtServiceDate").val());
+				// alert($("#txtPax").val());
+				// alert($("#txtItinerary").val());
+
+
+				addFormInfo(6);
+			})
+
+
+	})
+
+
+	</script>
+
+
+		<div class="container">
+			<!-- 加一空行 -->
+			<div class="row">
+				<div class="col-md-12"><p></p></div>				
+			</div>
+
+			<!-- 加一空行 -->
+			<div class="row">
+				<div class="col-md-12"><p></p></div>				
+			</div>
+
+			<div class="row">
+				<div class="col-md-2 col-md-offset-10"><span><i class="icon icon-user"></i>Martin Lu</span></div>
+			</div>
+
+			<!-- 加一空行 -->
+			<div class="row">
+				<div class="col-md-12"><p></p></div>				
+			</div>
+
+			<div class="row">
+				<ul class="nav nav-tabs" id="myTab">
+					<li class="active"><a id="a_1" data-toggle="tab" href="#BasicInfo"><i class="fa fa-car">&nbsp;BASIC INFO</i></a></li>
+					<li class=""><a id="a_2" data-toggle="tab" href="#GuestInfo"><i class="fa fa-child">&nbsp;GUEST INFO</i></a></li>
+					<li class=""><a id="a_3" data-toggle="tab" href="#FlightInfo"><i class="icon icon-plane">&nbsp;FLIGHT INFO</i></a></li>
+					<li class=""><a id="a_4" data-toggle="tab" href="#PaymentInfo"><i class="fa fa-cc-visa">&nbsp;PAYMENT INFO</i></a></li>
+				</ul>
+
+				<div class="tab-content" id="myTabContent">
+					<!--第一个页面基本信息  -->
+					<div id="BasicInfo" class="tab-pane fade active in">
+						<div class="container">
+							<div class="row"><p></p></div>
+							<!-- 服务类型 -->
+							<div class="row">
+								<div class="col-md-2"><label>Service Type :</label></div>
+								<!-- Bootstrap 控件无法通过ajax动态初始化,放弃 -->
+<!-- 								<div class="col-md-3"><select id="sltServiceType" name="type" class="selectpicker" data-style="btn-primary"> -->
+								<div class="col-md-3"><select id="sltServiceType" class="form-control">
+									</select></div>
+								<div id="divFlight" class="col-md-1 col-md-offset-1"><label>Flight:</label></div>
+								<div id="divFlight1" class="col-md-3"><input id="txtFlightNo" type="text" class="form-control" placeholder="Please enter Flight No."></div>
+							</div>
+
+							<!-- 加一空行 -->
+							<div class="row">
+								<div class="col-md-12"><p></p></div>
+							</div>
+
+							<!-- 机场 -->
+							<div class="row">
+									<div class="col-md-2"><label>Car Type :</label></div>
+									<div class="col-md-3">					
+										<select id="sltCarType" class="form-control"></select>
+									</div>
+									<div id="divAirport" class="col-md-1 col-md-offset-1"><label>Or</label></div>
+									<div id="divAirport1" class="col-md-3">					
+										<select id="sltAirport" class="form-control">
+												<option value=0>Please select</option>
+												<option>Suvarnabhumi</option>
+												<option>Don Mueang</option>
+												<option>Phuket</option>
+												<option>Chiang Mai</option>
+												<option>Krabi</option>
+												<option>Samui</option>												
+										</select>
+									</div>
+							</div>			
+
+							<div class="row"><p></p></div>
+
+
+							<!-- Spinner -->
+							<div class="row">
+								<div class="col-md-2"><label>Pax:</label></div>
+								<div class="col-md-3">
+										<div class="input-group spinner" data-trigger="spinner" id="spinner">
+											<input id="txtPax" type="text" class="form-control"class="form-control" value="1" data-max="20" data-min="1" data-step="1" readonly>
+											<div class="input-group-addon">
+												<a href="javascript:;" class="spin-up" data-spin="up"><i class="icon-sort-up"></i></a>
+												<a href="javascript:;" class="spin-down" data-spin="down"><i class="icon-sort-down"></i></a>
+											</div>
+										</div>									
+								</div>	
+
+								<!-- Pax -->
+								<div class="col-md-1 col-md-offset-1"><label>Child:</label></div>
+								<div class="col-md-3">									
+										<div class="input-group spinner" data-trigger="spinner" id="spinner">
+											<input id="txtChildren" type="text" class="form-control"class="form-control" value="0" data-max="20" data-min="0" data-step="1" readonly>
+											<div class="input-group-addon">
+												<a href="javascript:;" class="spin-up" data-spin="up"><i class="icon-sort-up"></i></a>
+												<a href="javascript:;" class="spin-down" data-spin="down"><i class="icon-sort-down"></i></a>
+											</div>
+										</div>									
+								</div>	
+							</div>
+
+							<div class="row"><p></p></div>
+
+							<!-- Spinner -->
+							<div class="row">
+								<div class="col-md-2"><label>Car Number:</label></div>
+								<div class="col-md-3">
+									<div class="input-group spinner" data-trigger="spinner" id="spinner">
+										<input id="txtCarNumber" type="text" class="form-control"class="form-control" value="1" data-max="20" data-min="1" data-step="1" readonly>
+										<div class="input-group-addon">
+											<a href="javascript:;" class="spin-up" data-spin="up"><i class="icon-sort-up"></i></a>
+											<a href="javascript:;" class="spin-down" data-spin="down"><i class="icon-sort-down"></i></a>
+										</div>
+									</div>
+								</div>	
+
+								<!-- Luggage -->
+								<div class="col-md-1 col-md-offset-1"><label>Luggage:</label></div>
+								<div class="col-md-3">
+									<div class="input-group spinner" data-trigger="spinner" id="spinner">
+										<input id="txtLuggage" type="text" class="form-control"class="form-control" value="1" data-max="20" data-min="0" data-step="1" readonly>
+										<div class="input-group-addon">
+											<a href="javascript:;" class="spin-up" data-spin="up"><i class="icon-sort-up"></i></a>
+											<a href="javascript:;" class="spin-down" data-spin="down"><i class="icon-sort-down"></i></a>
+										</div>
+									</div>
+								</div>	
+							</div>
+
+							<div class="row"><p></p></div>
+
+							<!-- 起点 -->
+							<div class="row">
+								<div class="col-md-2"><label>Start From :</label></div>
+								<div class="col-md-3">					
+									<input id="txtFromName" type="text" class="form-control" placeholder="Please enter Start From">
+								</div>
+								<div class="col-md-1 col-md-offset-1"><label>GPS :</label></div>
+								<div class="col-md-3">					
+									<input id="txtFromGPS" type="text" class="form-control" placeholder="Please enter GPS">
+								</div>
+							</div>
+
+							<div class="row">
+							<p></p>
+							</div>
+						
+							<div class="row">
+								<div class="col-md-2"><label>Address:</label></div>
+								<div class="col-md-3">					
+									<input id="txtFromAddr" type="text" class="form-control" placeholder="Please enter Address">
+								</div>
+								<div class="col-md-1 col-md-offset-1"><label>Tel:</label></div>
+								<div class="col-md-3">					
+									<input id="txtFromTel" type="text" class="form-control" placeholder="Please enter Tel">
+								</div>
+							</div>
+
+
+							<div class="row"><p></p></div>
+							<!-- 终点 -->
+							<div class="row">
+								<div class="col-md-2"><label>To :</label></div>
+								<div class="col-md-3">					
+									<input id="txtToName" type="text" class="form-control" placeholder="Please enter to">
+								</div>
+								<div class="col-md-1 col-md-offset-1"><label>GPS :</label></div>
+								<div class="col-md-3">					
+									<input id="txtToGPS" type="text" class="form-control" placeholder="Please enter GPS">
+								</div>
+							</div>
+
+							<div class="row"><p></p></div>
+						
+							<div class="row">
+								<div class="col-md-2"><label>Address:</label></div>
+								<div class="col-md-3">					
+									<input id="txtToAddr" type="text" class="form-control" placeholder="Please enter Address">
+								</div>
+								<div class="col-md-1 col-md-offset-1"><label>Tel:</label></div>
+								<div class="col-md-3">					
+									<input id="txtToTel" type="text" class="form-control" placeholder="Please enter Tel">
+								</div>
+							</div>
+
+
+							<div class="row"><p></p></div>
+							<!--Service Time-->	
+							<div class="row">
+								<div class="col-md-2">
+									<label for="dtp_input1"><i class="icon icon-calendar">&nbsp;Service Time :</i></label>
+								</div>
+								<div class="col-md-4">
+					               
+					                <div class="input-group date form_datetime col-md-12" data-date="" 
+					                data-date-format="dd/mm/yyyy hh:ii" data-link-field="dtp_input1">
+					                    <input id="txtServiceTime" class="form-control" size="16" type="text" value="" readonly>
+					                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+										<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+					                </div>
+									<input type="hidden" id="dtp_input1" value="" /><br/>
+					            </div>	            
+							</div>
+								<script type="text/javascript">
+								    $('.form_datetime').datetimepicker({
+								        //language:  'fr',
+								        weekStart: 1,
+								        todayBtn:  1,
+										autoclose: 1,
+										todayHighlight: 1,
+										startView: 2,
+										forceParse: 0,
+								        showMeridian: 0, //决定当天时间是否按子午线上下显示
+								        minuteStep:15 //分钟的步长是15分钟
+								    });
+								</script>
+
+							<div class="row">
+							<p></p>
+							</div>
+
+							<!--meeting point-->
+							<div class="row">
+								<div class="col-md-2"><label>Meeting Point :</label></div>
+								<div class="col-md-8">					
+									<input id="txtPickupPort" type="text" class="form-control" placeholder="Please enter meeting point">
+								</div>
+							</div>
+
+							<div class="row"><p></p></div>
+
+							<!--Itinerary-->			
+							<div class="row">
+								<div class="col-md-2"><label>Itinerary :</label></div>
+								<div class="col-md-3">					
+									<textarea id="txtItinerary" rows="3" type="text" class="form-control" placeholder="Please enter Itinerary"></textarea>
+								</div>
+								<div class="col-md-1 col-md-offset-1"><label>Remark:</label></div>
+								<div class="col-md-3">					
+									<textarea id="txtRemark" rows="3" class="form-control" placeholder="Please enter remark"></textarea>
+								</div>
+							</div>
+
+							<div class="row"><p></p></div>
+							<!--前进 后退按钮-->
+							<div class="row">
+								<div class="col-md-1 col-xs-3 col-md-offset-4">		
+									<button id="btn_1_next" type="button" class="btn btn-success">&nbsp;Next&nbsp;<i class="icon icon-chevron-right"></i></button>
+								</div>	
+								<div class="col-md-1 col-xs-3 col-md-offset-1">		
+									<button type="submit" class="btn btn-default"><i class="icon icon-check">Submit</i></button>
+								</div>
+								<div class="col-md-1 col-xs-3">
+									<button id="btnTest" class="btn btn-default"><i class="icon icon-check">Test Info</i></button>
+								</div>
+							</div>
+						<!--第一个container结束-->
+						</div>
+					<!--第一个Tab结束-->
+					</div>
+
+
+					<!--第二页 Guest Info-->
+					<div id="GuestInfo" class="tab-pane fade">
+						<div class="container">
+							<div class="row"><p></p></div>
+
+							<div class="row">
+								<div class="col-md-2"><label>Name(English) :</label></div>
+								<div class="col-md-3">					
+									<input id="txtEnName" type="text" class="form-control" placeholder="Please enter Name(English)">
+								</div>
+								<div class="col-md-2 col-md-offset-1"><label>Name(Original):</label></div>
+								<div class="col-md-3">					
+									<input id="txtOriginalName" type="text" class="form-control" placeholder="Please enter Name(Original)">
+								</div>
+							</div>
+
+							<div class="row"><p></p></div>
+
+							<div class="row">
+								<div class="col-md-2"><label>Phone Number:</label></div>
+								<div class="col-md-3">					
+									<input id="txtPhoneNumber" type="text" class="form-control" placeholder="Please enter Phone Number">
+								</div>
+								<div class="col-md-2 col-md-offset-1"><label>Email&nbsp;&nbsp;&nbsp;:</label></div>
+								<div class="col-md-3">					
+									<input id="txtEmail" type="text" class="form-control" placeholder="Please enter Email">
+								</div>
+							</div>
+
+							<div class="row"><p></p></div>
+
+							<!-- 订单来源 -->
+							<div class="row">
+									<div class="col-md-2"><label>Booking From :</label></div>
+									<div class="col-md-3">					
+										<select id="sltBookingFrom" class="form-control">
+										</select>
+									</div>					
+							</div>	
+
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<!--前进 后退按钮-->
+							<div class="row">
+								<div class="col-md-1 col-xs-3 col-md-offset-2">		
+									<button id="btn_1_pre" type="button" class="btn btn-success"><i class="icon icon-chevron-left">&nbsp;Prev&nbsp;</i></button>
+								</div>
+								<div class="col-md-1 col-xs-3 col-md-offset-1">		
+									<button id="btn_2_next" type="button" class="btn btn-success">&nbsp;Next&nbsp;<i class="icon icon-chevron-right"></i></button>
+								</div>	
+								<div class="col-md-1 col-xs-3 col-md-offset-1">
+									<button type="submit" class="btn btn-default"><i class="icon icon-check">Submit</i></button>
+								</div>
+							</div>
+
+						</div>	
+					</div>
+
+					<!--第三页 Flight Info-->
+					<div id="FlightInfo" class="tab-pane fade">
+						<div class="container">
+							<div class="row"><p></p></div>
+							<!--Flight-->
+							<div class="row">
+
+								<div class="col-md-2"><label>Flight Number:</label></div>
+								<div class="col-md-3">					
+									<input id="txtFlightNo1" type="text" class="form-control" placeholder="Please enter Flight Number">
+								</div>
+								<div class="col-md-1 col-md-offset-1"><label>Airline:</label></div>
+								<div class="col-md-3">					
+									<input id="txtAirline" type="text" class="form-control" placeholder="Please enter Airline">
+								</div>
+							</div>
+
+							<div class="row"><p></p></div>
+							<!--Departure Time-->	
+							<div class="row">
+								<div class="col-md-2"><label for="dtp_input2">Departure Time:</label>
+								</div>
+								<div class="col-md-4">
+					                <div class="input-group date form_datetime" data-date="" data-date-format="dd/mm/yyyy hh:ii" data-link-field="dtp_input2">
+					                    <input id="txtDepartureTime" class="form-control" size="16" type="text" value="" readonly>
+					                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+										<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+					                </div>
+									<input type="hidden" id="dtp_input2" value="" /><br/>
+					            </div>	            						
+							</div>
+								<script type="text/javascript">
+								    $('.form_datetime').datetimepicker({
+								        //language:  'fr',
+								        weekStart: 1,
+								        todayBtn:  1,
+										autoclose: 1,
+										todayHighlight: 1,
+										startView: 2,
+										forceParse: 0,
+								        showMeridian: 0, //决定当天时间是否按子午线上下显示
+								        minuteStep:15 //分钟的步长是15分钟
+								    });
+								</script>
+
+							<!--Arrival Time-->	
+							<div class="row">
+								<div class="col-md-2">
+									<label for="dtp_input3">Arrival Time:</label>
+								</div>
+								<div class="col-md-4">
+					               
+					                <div class="input-group date form_datetime" data-date="" 
+						                data-date-format="dd/mm/yyyy hh:ii" data-link-field="dtp_input3">
+						                    <input id="txtArrivalTime" class="form-control" size="16" type="text" value="" readonly>
+						                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+											<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+						                </div>
+										<input type="hidden" id="dtp_input3" value="" /><br/>
+						            </div>
+							</div>
+
+								<script type="text/javascript">
+								    $('.form_datetime').datetimepicker({
+								        //language:  'fr',
+								        weekStart: 1,
+								        todayBtn:  1,
+										autoclose: 1,
+										todayHighlight: 1,
+										startView: 2,
+										forceParse: 0,
+								        showMeridian: 0, //决定当天时间是否按子午线上下显示
+								        minuteStep:15 //分钟的步长是15分钟
+								    });
+								</script>
+
+							<!--提示是否转机-->
+						    <div class="row">
+						    	<div class="col-md-3">
+						    		<input id="ckbTransferFlight" type="checkbox">Transfer Flight?
+						    	</div>
+						    </div>
+							<div class="row">
+								<p></p>
+							</div>
+							<!--Transfer Flight-->
+							<div class="row">
+								<div class="col-md-2"><label>Flight Number:</label></div>
+								<div class="col-md-3">
+									<input id="txtTransFlightNo" type="text" class="form-control" placeholder="Please enter Transfer Flight Number" disabled>
+								</div>
+								<div class="col-md-1 col-md-offset-1"><label>Airline:</label></div>
+								<div class="col-md-3">
+									<input id="txtTransAirline" type="text" class="form-control" placeholder="Please enter Transfer Airline" disabled>
+								</div>
+							</div>
+
+							<div class="row"><p></p></div>
+
+							<!--Transfer Departure Time-->	
+							<div class="row">
+								<div class="col-md-2">
+									<label for="dtp_input4">Departure Time:</label>
+								</div>
+								<div class="col-md-4">
+					               
+					                <div class="input-group date form_datetime col-md-12" data-date="" 
+					                data-date-format="dd/mm/yyyy hh:ii" data-link-field="dtp_input4">
+					                    <input id="txtTransDepartureTime" class="form-control" size="16" type="text" value="" readonly>
+					                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+										<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+					                </div>
+									<input type="hidden" id="dtp_input4" value="" /><br/>
+					            </div>	            
+					        </div>    
+								<script type="text/javascript">
+								    $('.form_datetime').datetimepicker({
+								        //language:  'fr',
+								        weekStart: 1,
+								        todayBtn:  1,
+										autoclose: 1,
+										todayHighlight: 1,
+										startView: 2,
+										forceParse: 0,
+								        showMeridian: 0, //决定当天时间是否按子午线上下显示
+								        minuteStep:15 //分钟的步长是15分钟
+								    });
+								</script>
+
+
+							<!--前进 后退按钮-->
+							<div class="row">
+								<div class="col-md-1 col-xs-3 col-md-offset-2">		
+									<button id="btn_2_pre" type="button" class="btn btn-success"><i class="icon icon-chevron-left">&nbsp;Prev&nbsp;</i></button>
+								</div>
+								<div id="btn_3_next" class="col-md-1 col-xs-3 col-md-offset-1">		
+									<button type="button" class="btn btn-success">&nbsp;Next&nbsp;<i class="icon icon-chevron-right"></i></button>
+								</div>	
+								<div class="col-md-1 col-xs-3 col-md-offset-1">
+									<button type="submit" class="btn btn-default"><i class="icon icon-check">Submit</i></button>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!--第四页 付款信息-->
+					<div id="PaymentInfo" class="tab-pane fade">
+						<div class="container">
+							<div class="row"><p></p></div>			
+							<!--Price & Currency-->			
+							<div class="row">
+								<div class="col-md-2"><label>Price:</label></div>
+								<div class="col-md-3">					
+									<input id="txtPrice" type="text" class="form-control" placeholder="Please enter Itinerary">
+								</div>
+								<!-- Currency -->
+								<div class="col-md-1 col-md-offset-1"><label>Currency:</label></div>
+								<div class="col-md-3">					
+									<select id="sltCurrency" class="form-control">
+									</select>
+								</div>					
+
+							</div>
+
+							<div class="row"><p></p></div>
+
+							<!--Prepaid-->			
+							<div class="row">
+								<div class="col-md-2"><label>Prepaid:</label></div>
+								<div class="col-md-3">					
+									<input id="txtPrepaid" type="text" class="form-control" placeholder="Please enter Prepaid">
+								</div>			
+							</div>
+
+							<div class="row">
+								<p></p>
+							</div>
+
+							<!--Cash to Pay-->			
+							<div class="row">
+								<div class="col-md-2"><label>Cash to Pay:</label></div>
+								<div class="col-md-3">					
+									<input id="txtCashToPay" type="text" class="form-control" placeholder="Please enter Cash to Pay">
+								</div>			
+							</div>
+
+							<div class="row">
+							<p></p>
+							</div>
+
+							<!--Payment Method-->			
+							<div class="row">
+									<div class="col-md-2"><label>Payment Method:</label></div>
+									<div class="col-md-3">					
+										<select id="sltPaymentMethod" class="form-control">
+										</select>
+									</div>					
+							</div>	
+
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+							<div class="row"><label></label></div>
+
+
+							<!--前进 后退按钮-->
+							<div class="row">
+								<div class="col-md-1 col-xs-3 col-md-offset-4">		
+									<button id="btn_3_pre" type="button" class="btn btn-success"><i class="icon icon-chevron-left">&nbsp;Prev&nbsp;</i></button>
+								</div>
+								<div class="col-md-1 col-xs-3 col-md-offset-1">
+									<button type="submit" class="btn btn-default"><i class="icon icon-check">Submit</i></button>
+								</div>
+							</div>
+						</div>
+					<!--第四个Tab结束  -->
+					</div>
+				<!-- tab-content结束 -->
+				</div>	
+			<!--第二个row结束  -->
+			</div>
+		<!--container结束  -->
+		</div>
+	</body>
+</html>
 
